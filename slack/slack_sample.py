@@ -4,7 +4,7 @@ from slackclient import SlackClient
 import time
 
 #instantiate a new slack_client object
-sc = SlackClient("xoxp-223543408598-222652276210-222005906880-1c087b0cff1eac7df112dfb4a43a50e7")
+sc = SlackClient("")
 
 #send a webrequest as an api_call
 sc.api_call("channels.list")
