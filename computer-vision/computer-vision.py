@@ -1,6 +1,6 @@
 import requests
 import datetime
-#import cv2
+import cv2
 
 
 subscription_key = "" # your subscription key here
