@@ -1,0 +1,15 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="requestsetrelaystate">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="newrelaystate" type="xs:string" />
+</xs:sequence>
+<xs:attribute name="name" type="xs:string" use="required" />
+<xs:attribute name="sendFrom" type ="xs:string" use="required" />
+<xs:attribute name="sendTo" type ="xs:string" use="optional" />
+<xs:attribute name="sourceClient" type="xs:string" use="required" />
+<xs:attribute name="hide" type ="xs:string" use="optional" />
+<xs:attribute name="targetClient" type="xs:string" use="optional" />
+</xs:complexType>
+</xs:element>
+</xs:schema>
