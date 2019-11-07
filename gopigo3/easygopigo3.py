@@ -98,6 +98,7 @@ class EasyGoPiGo3():
         self.LED_LEFT_EYE = 0
         self.LED_RIGHT_EYE = 0
         self.WHEEL_CIRCUMFERENCE = 1
+        self.WHEEL_BASE_CIRCUMFERENCE = 1
         self.set_speed(self.DEFAULT_SPEED)
         self.left_eye_color = (0, 255, 255)
         self.right_eye_color = (0, 255, 255)
