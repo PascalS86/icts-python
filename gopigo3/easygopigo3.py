@@ -385,11 +385,15 @@ class EasyGoPiGo3():
         self.set_motor_position(self.MOTOR_RIGHT,
                                 (StartPositionRight + degrees))
 
-
+        i = 0
         if blocking:
             while self.target_reached(
                     StartPositionLeft + degrees,
                     StartPositionRight + degrees) is False:
+                i = i + 1
+                if i == 10:
+                    i = 0
+                    break
                 time.sleep(0.1)
         return
 
@@ -560,11 +564,15 @@ class EasyGoPiGo3():
         # Set each motor target position
         self.set_motor_position(self.MOTOR_LEFT, (StartPositionLeft + (left_target * direction)))
         self.set_motor_position(self.MOTOR_RIGHT, (StartPositionRight + (right_target * direction)))
-        
+        i = 0
         if blocking:
             while self.target_reached(
                     StartPositionLeft + (left_target * direction),
                     StartPositionRight + (right_target * direction)) is False:
+                i = i + 1
+                if i == 10:
+                    i = 0
+                    break
                 time.sleep(0.1)
         
             # reset to original speed once done
@@ -687,12 +695,17 @@ class EasyGoPiGo3():
         motor_left_previous = None
         motor_right_previous = None
 
+        i = 0
         if blocking:
             # Note to self. using target_reached() here didn't work.
             # So instead let's keep waiting till the motors stop moving
             while motor_left_previous != self.MOTOR_LEFT or motor_right_previous != self.MOTOR_RIGHT:
                 motor_left_previous = self.MOTOR_LEFT
                 motor_right_previous = self.MOTOR_RIGHT
+                i = i + 1
+                if i == 10:
+                    i = 0
+                    break
                 time.sleep(0.025)
 
     def set_motor_power(self, a,b):
@@ -787,10 +800,15 @@ class EasyGoPiGo3():
         self.set_motor_position(self.MOTOR_RIGHT,
                                 (StartPositionRight - WheelTurnDegrees))
 
+        i = 0
         if blocking:
             while self.target_reached(
                     StartPositionLeft + WheelTurnDegrees,
                     StartPositionRight - WheelTurnDegrees) is False:
+                i = i + 1
+                if i == 10:
+                    i = 0
+                    break
                 time.sleep(0.1)
 
 
