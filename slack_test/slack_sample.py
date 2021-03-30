@@ -1,24 +1,26 @@
 
-slack_token = "[API_TOKEN]"
 import os
-import slack
+from slack_sdk.web import WebClient
+from slack_sdk.rtm.v2 import RTMClient
+from slack_sdk.errors import SlackApiError
 
-@slack.RTMClient.run_on(event='message')
-def say_hello(**payload):
-    data = payload['data']
-    web_client = payload['web_client']
-    rtm_client = payload['rtm_client']
-    print(data)
-    # if 'Hello' in data.get('text', []):
-    #     channel_id = data['channel']
-    #     thread_ts = data['ts']
-    #     user = data['user']
-    #     # web_client.chat_postMessage(
-    #     #     channel=channel_id,
-    #     #     text=f"Hi <@{user}>!",
-    #     #     thread_ts=thread_ts
-    #     # )
 
-slack_token = slack_token
-rtm_client = slack.RTMClient(token=slack_token)
-rtm_client.start()
+slack_token = "[API_TOKEN]"
+slack_bot_token = "[BOT_API_TOKEN]"
+
+rtm = RTMClient(token=slack_bot_token)
+@rtm.on("message")
+def handle(client: RTMClient, event: dict):
+    print(event)
+    client = WebClient(token=slack_token)
+    try:
+        response = client.chat_postMessage(channel='#general', text="Hello world!")
+        assert response["message"]["text"] == "Hello world!"
+    except SlackApiError as e:
+        # You will get a SlackApiError if "ok" is False
+        assert e.response["ok"] is False
+        assert e.response["error"]  # str like 'invalid_auth', 'channel_not_found'
+        print(f"Got an error: {e.response['error']}")
+
+print("Bot is up and running!")
+rtm.start()
